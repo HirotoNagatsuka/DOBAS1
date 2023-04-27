@@ -5,61 +5,70 @@ using UnityEngine.UI;
 
 public class DiceThrow : MonoBehaviour
 {
-    public GameObject Dice;
+    public GameObject DicePrefab;//サイコロのプレファブを入れる.
+    private GameObject Dice;//サイコロ用の表示・非表示を繰り返す用.
     public int num;
+    #region ランダムに回転させる用の変数宣言.
     private int rotateX;
     private int rotateY;
     private int rotateZ;
+    #endregion
+
+
     [SerializeField] GameObject DiceCamera;
-    private GameObject parent;
+    //[SerializeField] Text DiceNumText;
     Vector3 CameraPos;
     public GameObject oya;    //親オブジェクト
     public Transform kodomo; //子オブジェクト.
+    private bool DiceFlg;//サイコロ作成フラグ.
 
     private void Start()
     {
-        ShakeDice();
-        //DiceCamera.SetActive(true);
-        //CameraPos = DiceCamera.transform.position;
-        //CameraPos.x += 3;
-        //CameraPos.y -= 3;
-        //for(int i = 0; i < num; i++)
-        //{
-        //    rotateX = Random.Range(0, 360);
-        //    rotateY = Random.Range(0, 120);
-        //    rotateZ = Random.Range(0, 360);
-        //    GameObject dice = GameObject.Instantiate(Dice) as GameObject;
-        //    dice.transform.position = CameraPos;
-        //    dice.GetComponent<Rigidbody>().AddForce(-transform.right * 300);
-        //    dice.transform.Rotate(rotateX, rotateY, rotateZ);
-        //}
+        Dice = GameObject.Instantiate(DicePrefab, CameraPos, Quaternion.identity, kodomo);
+        Dice.SetActive(false);
     }
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            rotateX = Random.Range(0, 360);
-            rotateY = Random.Range(0, 360);
-            rotateZ = Random.Range(0, 360);
-            GameObject dice = GameObject.Instantiate(Dice) as GameObject;
-            dice.transform.position = new Vector3(8, 8, 0);
-            dice.GetComponent<Rigidbody>().AddForce(-transform.right * 300);
-            dice.transform.Rotate(rotateX, rotateY, rotateZ);
+            ShakeDice();
         }
     }
 
+    /// <summary>
+    /// サイコロを振る用の関数
+    /// サイコロのプレファブが無ければ作成し、有れば表示・非表示を繰り返す.
+    /// </summary>
     public void ShakeDice()
     {
         DiceCamera.SetActive(true);
+        Dice.SetActive(true);
+        Dice.transform.position = CameraPos;
         CameraPos = DiceCamera.transform.position;
         CameraPos.x += 3;
         CameraPos.y -= 3;
         rotateX = Random.Range(0, 360);
-        rotateY = Random.Range(0, 120);
+        rotateY = Random.Range(0, 360);
         rotateZ = Random.Range(0, 360);
-        GameObject dice = GameObject.Instantiate(Dice, CameraPos,Quaternion.identity,kodomo);
-        dice.transform.SetParent(kodomo, true);
-        dice.GetComponent<Rigidbody>().AddForce(-transform.right * 300);
-        dice.transform.Rotate(rotateX, rotateY, rotateZ);
+        Dice.GetComponent<Rigidbody>().AddForce(-transform.right * 300);
+        Dice.transform.Rotate(rotateX, rotateY, rotateZ);
+    }
+
+    /// <summary>
+    /// サイコロを非表示にし、サイコロを振る処理を終わらせる.
+    /// </summary>
+    public void HiddenDice()
+    {
+        StartCoroutine(HiddenDiceCoroutine());
+    }
+
+    // コルーチン本体
+    private IEnumerator HiddenDiceCoroutine()
+    {
+        // 2秒間待つ
+        yield return new WaitForSeconds(2);
+        DiceCamera.SetActive(false);
+        Dice.SetActive(false);
+        Debug.Log("コルーチン呼び出し終了");
     }
 }

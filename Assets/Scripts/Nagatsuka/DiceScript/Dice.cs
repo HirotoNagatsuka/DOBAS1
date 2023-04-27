@@ -38,30 +38,30 @@ public class Dice : MonoBehaviour
             if (rbody.velocity.magnitude == 0)//マグニチュードが0の場合（垂直判定）.
             {
                 Stage.GetComponent<DiceStage>().ConfirmNumber();//ステージで行っている出目判定を返す.
-                DiceUI.gameObject.transform.GetChild(0).GetComponent<Text>().text = number.ToString();//出目のUI表示.
-                switch (number)//出目によってUIの表示を変更する.
-                {
-                    case 1:
-                        DiceUI.transform.localPosition = new Vector3(0, 0, 3);
-                        break;
-                    case 2:
-                        DiceUI.transform.localPosition = new Vector3(0, 3, 0);
-                        break;
-                    case 3:
-                        DiceUI.transform.localPosition = new Vector3(-3, 0, 0);
-                        break;
-                    case 4:
-                        DiceUI.transform.localPosition = new Vector3(3, 0, 0);
-                        break;
-                    case 5:
-                        DiceUI.transform.localPosition = new Vector3(0, -3, 0);
-                        break;
-                    case 6:
-                        DiceUI.transform.localPosition = new Vector3(0, 0, -3);
-                        break;
-                    default:
-                        break;
-                }
+                //DiceUI.gameObject.transform.GetChild(0).GetComponent<Text>().text = number.ToString();//出目のUI表示.
+                //switch (number)//出目によってUIの表示を変更する.
+                //{
+                //    case 1:
+                //        DiceUI.transform.localPosition = new Vector3(0, 0, 3);
+                //        break;
+                //    case 2:
+                //        DiceUI.transform.localPosition = new Vector3(0, 3, 0);
+                //        break;
+                //    case 3:
+                //        DiceUI.transform.localPosition = new Vector3(-3, 0, 0);
+                //        break;
+                //    case 4:
+                //        DiceUI.transform.localPosition = new Vector3(3, 0, 0);
+                //        break;
+                //    case 5:
+                //        DiceUI.transform.localPosition = new Vector3(0, -3, 0);
+                //        break;
+                //    case 6:
+                //        DiceUI.transform.localPosition = new Vector3(0, 0, -3);
+                //        break;
+                //    default:
+                //        break;
+                //}
             }
         }
     }

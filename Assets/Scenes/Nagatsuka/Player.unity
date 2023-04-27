@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8872e784b458d499978f33366a4fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dice: {fileID: 3310249835269611495, guid: baf45781312b4994ebc07f9a2cebac12, type: 3}
+  DicePrefab: {fileID: 3310249835269611495, guid: baf45781312b4994ebc07f9a2cebac12, type: 3}
   num: 1
   DiceCamera: {fileID: 1325283517}
   oya: {fileID: 1322863241}
@@ -1694,6 +1694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiceNumText: {fileID: 0}
+  DiceThrow: {fileID: 0}
 --- !u!1 &1637820273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiceNumText: {fileID: 1888104058}
+  DiceThrow: {fileID: 1322863241}
 --- !u!64 &1637820276
 MeshCollider:
   m_ObjectHideFlags: 0
