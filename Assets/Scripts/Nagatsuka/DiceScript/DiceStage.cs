@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class DiceStage : MonoBehaviour
 {
-    [SerializeField] GameObject DiceNumText;
+    [SerializeField] Text DiceNumText;
     private int number;
-    private int diceSum;//サイコロの目の合計値.
 
     void Start()
     {
@@ -40,9 +39,21 @@ public class DiceStage : MonoBehaviour
             {
                 number = 1;
             }
+
         }
-    public int ReturnNumber()
+    public void ConfirmNumber()
     {
-        return number;
+        if (number == 4)
+        {
+            DiceNumText.text = "Attack";
+        }
+        else if(number == 5 || number == 6)
+        {
+            DiceNumText.text = "Doubt";
+        }
+        else
+        {
+            DiceNumText.text = number.ToString();
+        }
     }
 }
