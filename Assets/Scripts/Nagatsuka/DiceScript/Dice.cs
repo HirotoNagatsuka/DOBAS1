@@ -12,8 +12,7 @@ public class Dice : MonoBehaviour
     Rigidbody rbody;
     private int number;//出目を入れる.
     [SerializeField] GameObject Stage;//ステージに当たった出目を判定するための変数宣言.
-    GameObject DiceUI;//子供のキャンバスを取得するための変数宣言
-
+    GameObject DiceUI;//子供のキャンバスを取得するための変数宣言.
     #region Start・Update関数
     void Start()
     {
@@ -25,10 +24,10 @@ public class Dice : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Destroy(gameObject);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    Destroy(gameObject);
+        //}
     }
     #endregion
 
@@ -38,7 +37,7 @@ public class Dice : MonoBehaviour
         {
             if (rbody.velocity.magnitude == 0)//マグニチュードが0の場合（垂直判定）.
             {
-                number = Stage.GetComponent<DiceStage>().ReturnNumber();//ステージで行っている出目判定を返す.
+                Stage.GetComponent<DiceStage>().ConfirmNumber();//ステージで行っている出目判定を返す.
                 DiceUI.gameObject.transform.GetChild(0).GetComponent<Text>().text = number.ToString();//出目のUI表示.
                 switch (number)//出目によってUIの表示を変更する.
                 {
@@ -59,6 +58,8 @@ public class Dice : MonoBehaviour
                         break;
                     case 6:
                         DiceUI.transform.localPosition = new Vector3(0, 0, -3);
+                        break;
+                    default:
                         break;
                 }
             }
